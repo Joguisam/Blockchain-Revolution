@@ -1,0 +1,977 @@
+/* ==========================================================================
+   CONFIGURACIÓN DE VARIABLES (Custom Properties)
+   ========================================================================== */
+   :root {
+    /* Colores */
+    --primary-color: #00d4ff;
+    --primary-variant: #0055ff;
+    --secondary-color: #6e40ff;
+    --bg-dark: #0a0b10;
+    --bg-card: #161b22;
+    --bg-input: #0d1117;
+    --text-main: #ffffff;
+    --text-muted: #a0a0a0;
+    --success: #00ff88;
+    
+    /* Espaciados y Bordes */
+    --container-padding: 5%;
+    --section-padding: 80px 0;
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   RESET Y ESTILOS BASE
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button, .navbar__button {
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+/* ==========================================================================
+   NAVEGACIÓN (Navbar) - AJUSTE DE LOGO Y DIMENSIONES
+   ========================================================================== */
+.navbar {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: center;
+    
+    /* Navbar Flotante */
+    margin: 1rem 5%; 
+    padding: 0.6rem 2.5rem; /* Padding reducido para hacerlo más delgado */
+    border-radius: 100px; /* Bordes totalmente circulares */
+    
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    
+    position: sticky;
+    top: 1.5rem;
+    z-index: 1000;
+    gap: 1.5rem;
+    transition: all 0.4s ease;
+}
+
+/* ==========================================================================
+   LOGO - TAMAÑO PROFESIONAL
+   ========================================================================== */
+.navbar__logo {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.navbar__logo img {
+    height: 32px; /* Tamaño de logo estándar: más discreto y elegante */
+    width: auto;
+    filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.2)); /* Brillo sutil */
+}
+
+.navbar__logo:hover {
+    transform: scale(1.05) rotate(-3deg);
+}
+
+/* ==========================================================================
+   LINKS (Manteniendo la interactividad previa)
+   ========================================================================== */
+.navbar__links {
+    display: flex;
+    list-style: none;
+    gap: 2.2rem;
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 6px 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.navbar__link:hover {
+    color: var(--primary-color);
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+.navbar__link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.navbar__link:hover::after {
+    transform: scaleX(1);
+}
+
+/* ==========================================================================
+   BOTONES (Sin decoración y con el mismo estilo)
+   ========================================================================== */
+.navbar__actions {
+    display: flex;
+    gap: 1rem;
+    flex: 0 1 auto;
+}
+
+.navbar__button {
+    text-decoration: none !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.navbar__button--contact {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.navbar__button--login {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-variant));
+    color: #000;
+    border: none;
+}
+
+.navbar__button--login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+}
+
+/* ==========================================================================
+   DEFINICIÓN DE LA ANIMACIÓN (Keyframes)
+   ========================================================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px); /* Empieza 40px más abajo */
+        filter: blur(5px);           /* Un ligero desenfoque inicial */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);    /* Llega a su posición original */
+        filter: blur(0);
+    }
+}
+/* ==========================================================================
+   HERO SECTION - ESTRUCTURA DE CENTRADO
+   ========================================================================== */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center; /* Centra el hero__content horizontalmente */
+    align-items: center;     /* Centra el hero__content verticalmente */
+    padding: 2rem var(--container-padding);
+    background: radial-gradient(circle at center, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+}
+
+.hero__content {
+    /* Este es el div que querías centrar */
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Centra el título, texto y botones internamente */
+    text-align: center;
+    gap: 2rem;
+
+    /* APLICACIÓN DEL EFECTO DE BARRIDO */
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* ==========================================================================
+   TEXTOS
+   ========================================================================== */
+.hero__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.hero__text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 550px;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   BOTONES CON GLASSMORPHISM Y HOVER INTERACTIVO
+   ========================================================================== */
+.hero__buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hero__btn {
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 12px; /* Un poco menos redondeado para look moderno */
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    /* Base Glassmorphism para ambos */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Botón EXPLORE (Cian Glass) */
+.hero__btn--explore {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero__btn--explore:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+    color: #fff;
+}
+
+/* Botón CONTACT (White Glass) */
+.hero__btn--contact {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.hero__btn--contact:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+/* Micro-interacción al presionar */
+.hero__btn:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+/* ==========================================================================
+   INFO SECTION - BASE Y CENTRADO
+   ========================================================================== */
+.info-section {
+    padding: var(--section-padding);
+    background-color: rgba(255, 255, 255, 0.02);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.info-section__container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 3rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* AGREGADO: Transición para el contenedor */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* AGREGADO: Interacción al pasar el mouse por la sección */
+.info-section__container:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+                inset 0 0 20px rgba(0, 212, 255, 0.05);
+    transform: translateY(-5px);
+}
+
+/* ==========================================================================
+   CONTENIDO E INTERACCIONES DE TEXTO
+   ========================================================================== */
+.info-section__title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    transition: transform 0.4s ease; /* AGREGADO */
+}
+
+/* AGREGADO: El título resalta al hacer hover en el contenedor */
+.info-section__container:hover .info-section__title {
+    color: var(--primary-color);
+    transform: scale(1.02);
+}
+
+.info-section__description {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    color: var(--text-muted);
+    transition: color 0.4s ease; /* AGREGADO */
+}
+
+.info-section__container:hover .info-section__description {
+    color: var(--text-main);
+}
+
+/* ==========================================================================
+   BOTONES - INTERACCIÓN AVANZADA (AGREGADO)
+   ========================================================================== */
+.info-section__btn {
+    padding: 0.8rem 2rem;
+    margin: 0 0.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transition: all 0.3s ease; /* AGREGADO */
+}
+
+/* Botón APRENDER - Efecto de borde iluminado */
+.info-section__btn--learn:hover {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+    background: rgba(0, 212, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Botón COMENZAR - Efecto de pulso y brillo */
+.info-section__btn--start {
+    background: var(--primary-color);
+    color: #000;
+}
+
+.info-section__btn--start:hover {
+    background: var(--primary-variant);
+    color: #fff;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 85, 255, 0.3);
+}
+
+/* AGREGADO: Micro-interacción de clic para ambos botones */
+.info-section__btn:active {
+    transform: scale(0.95);
+}
+
+/* ==========================================================================
+   ANIMACIÓN DE REBOTE (Solo esta definición es nueva)
+   ========================================================================== */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ==========================================================================
+   FILAS DE CONTENIDO (Layout Alternado)
+   ========================================================================== */
+.row-section {
+    padding: var(--section-padding);
+}
+
+.row-section__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.row-section--reversed .row-section__wrapper {
+    direction: rtl;
+}
+
+.row-section--reversed .row-section__text-column {
+    direction: ltr;
+}
+
+.row-section__title {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease; /* AGREGADO */
+}
+
+/* AGREGADO: Interacción de título al pasar por la fila */
+.row-section__wrapper:hover .row-section__title {
+    color: var(--primary-color);
+}
+
+.row-section__subtitle {
+    margin-top: 2rem;
+    color: var(--primary-color);
+}
+
+.row-section__description {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.row-section__btn {
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--border-radius);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-right: 1rem;
+    transition: all 0.3s ease; /* AGREGADO */
+}
+
+/* AGREGADO: Interacción de botones */
+.row-section__btn:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
+}
+
+.row-section__btn:active {
+    transform: scale(0.95);
+}
+
+.row-section__img {
+    border-radius: var(--border-radius);
+    filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.1));
+    animation: float 4s ease-in-out infinite; /* AGREGADO: Rebote infinito */
+    transition: filter 0.3s ease; /* AGREGADO */
+}
+
+/* AGREGADO: Interacción de imagen */
+.row-section__img:hover {
+    filter: drop-shadow(0 0 40px rgba(0, 212, 255, 0.4));
+    animation-play-state: paused;
+}
+
+/* ==========================================================================
+    Crypto card section
+   ========================================================================== */
+
+.crypto-section {
+    padding: var(--section-padding);
+    background: #000;
+}
+
+.crypto-section__title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.crypto-carousel__track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.crypto-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: var(--transition);
+}
+
+.crypto-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.crypto-card__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.crypto-card__icon {
+    width: 48px;
+    height: 48px;
+}
+
+.crypto-card__name {
+    display: block;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.crypto-card__symbol {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.crypto-card__price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--success);
+}
+
+.crypto-card__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+}
+/* ==========================================================================
+   BOTONES - INTERACTIVIDAD AVANZADA (HOVER Y CLICK)
+   ========================================================================== */
+.crypto-card__buttons {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+/* Estilo Base de Botones */
+.crypto-card__btn {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 12px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave */
+}
+
+/* BOTÓN COMPRAR (Verde Neón) */
+.crypto-card__btn--buy {
+    background-color: #00ff88; /* El verde brillante de tu imagen */
+    color: #000;
+}
+
+/* AGREGADO: Efecto Hover (Resplandor neón) */
+.crypto-card__btn--buy:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.6); /* Brillo neón externo */
+    filter: brightness(1.1);
+}
+
+/* AGREGADO: Efecto Click (Presión) */
+.crypto-card__btn--buy:active {
+    transform: scale(0.92); /* Se encoge al presionar */
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.8);
+}
+
+/* BOTÓN TRADEA (Gris Oscuro) */
+.crypto-card__btn--trade {
+    background-color: #2a2e35;
+    color: #fff;
+}
+
+/* AGREGADO: Efecto Hover para Tradea */
+.crypto-card__btn--trade:hover {
+    background-color: #383d46;
+    transform: translateY(-3px);
+}
+
+/* AGREGADO: Efecto Click para Tradea */
+.crypto-card__btn--trade:active {
+    transform: scale(0.92);
+}
+/* ==========================================================================
+   CONTACT SECTION
+   ========================================================================== */
+.contact-section {
+    padding: var(--section-padding);
+}
+
+.contact-section__container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    padding: 3rem;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.contact-form__group {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.contact-form__input, .contact-form__textarea {
+    width: 100%;
+    padding: 1rem;
+    background: var(--bg-input);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: #fff;
+    outline: none;
+}
+
+.contact-form__input:focus, .contact-form__textarea:focus {
+    border-color: var(--primary-color);
+}
+
+.contact-form__btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   ARTÍCULO Y TEXTOS (ESTILO UNIFICADO INDEX)
+   ========================================================================== */
+.article-container {
+    display: flex;
+    flex-direction: column;
+    gap: 100px; /* Volvemos al espacio original para que respire mejor */
+    padding: 60px 0;
+}
+
+.edu-section__description {
+    font-size: 1.1rem; /* Tamaño estándar del Index para mejor lectura */
+    color: #a0a0a0;   /* Gris suave del diseño original */
+    line-height: 1.8;  /* Más espacio entre líneas para elegancia */
+    margin-bottom: 1.5rem;
+}
+
+.edu-section__list {
+    list-style: none;
+    padding: 0;
+}
+
+.edu-section__list-item {
+    font-size: 1rem;
+    color: #a0a0a0;
+    margin-bottom: 12px;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+/* Bullet neón para que combine */
+.edu-section__list-item::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #00ff88;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   SECCIÓN EDUCATIVA - ORDEN INTERCALADO Y FLEX
+   ========================================================================== */
+.edu-section__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    gap: 60px;
+}
+
+/* Intercalado automático para todas las secciones */
+.edu-section:nth-child(even) .edu-section__wrapper {
+    flex-direction: row-reverse;
+}
+
+/* Forzar Imagen a la izquierda y Tabla a la derecha específicamente */
+.edu-section:has(.comparison-table) .edu-section__wrapper {
+    flex-direction: row-reverse !important; 
+}
+
+.edu-section__text-column, 
+.edu-section__image-column {
+    flex: 1;
+}
+
+/* ==========================================================================
+   TABLAS - ESTILO PRO
+   ========================================================================== */
+.comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.comparison-table__header {
+    background: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+    padding: 20px;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.comparison-table__cell {
+    padding: 18px 20px;
+    color: #e0e0e0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.95rem;
+}
+
+.comparison-table__row:hover .comparison-table__cell {
+    background: rgba(0, 212, 255, 0.05);
+    color: #00ff88;
+}
+
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL - FLEXBOX RESPONSIVE
+   ========================================================================== */
+.article-container {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    padding: 40px 5%; /* Margen lateral flexible */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   SECCIÓN EDUCATIVA - DISEÑO FLEX E INTERCALADO
+   ========================================================================== */
+.edu-section__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap; /* Permite que el contenido baje en pantallas pequeñas */
+}
+
+/* Intercalado automático */
+.edu-section:nth-child(even) .edu-section__wrapper {
+    flex-direction: row-reverse;
+}
+
+/* En la sección de la tabla, forzamos imagen a la izquierda */
+.edu-section:has(.comparison-table) .edu-section__wrapper {
+    flex-direction: row-reverse !important; 
+}
+
+.edu-section__text-column, 
+.edu-section__image-column {
+    flex: 1;
+    min-width: 300px; /* Asegura que el texto y la imagen tengan espacio */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   IMÁGENES - TRANSPARENTES Y RESPONSIVAS
+   ========================================================================== */
+.edu-section__img {
+    /* Ajuste de tamaño flexible */
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    
+    /* Imagen completa y sin fondo */
+    object-fit: contain;
+    background: transparent !important; /* Fuerza la transparencia total */
+    border: none !important;           /* Elimina cualquier borde residual */
+    
+    /* Animación de levitación */
+    animation: float 5s ease-in-out infinite;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.edu-section__img:hover {
+    transform: scale(1.05);
+    /* Resplandor externo para que destaque sobre el fondo oscuro */
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4));
+}
+
+/* ==========================================================================
+   ANIMACIÓN DE FLOTADO
+   ========================================================================== */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* ==========================================================================
+   FOOTER - ESTILO GLOBAL Y RESPONSIVE
+   ========================================================================== */
+.footer {
+    background: #050608; /* Fondo oscuro profundo */
+    padding: 80px 0 40px;
+    border-top: 1px solid rgba(0, 212, 255, 0.3); /* Línea neón sutil */
+    margin-top: 100px;
+    width: 100%;
+}
+
+.footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Permite que las columnas bajen en móvil */
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer__column {
+    flex: 1;
+    min-width: 250px; /* Evita que las columnas sean muy delgadas */
+}
+
+/* Títulos con Degradado */
+.footer__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #ffffff, #00d4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer__subtitle {
+    color: #00ff88; /* Verde Neón */
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Textos y Enlaces */
+.footer__text, 
+.footer__contact-info {
+    color: #a0a0a0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.footer__list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer__item {
+    margin-bottom: 12px;
+}
+
+.footer__link {
+    text-decoration: none;
+    color: #a0a0a0;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.footer__link:hover {
+    color: #00d4ff; /* Cian al pasar el mouse */
+    padding-left: 10px; /* Efecto de desplazamiento */
+}
+
+/* Redes Sociales - Estilo Botón Neón */
+.footer__social {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.footer__social-link {
+    text-decoration: none;
+    color: #00d4ff;
+    font-size: 0.85rem;
+    padding: 8px 15px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.4s ease;
+}
+
+.footer__social-link:hover {
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    transform: translateY(-3px);
+    color: #fff;
+}
+
+/* Parte Inferior (Copyright) */
+.footer__bottom {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer__copy {
+    color: #555;
+    font-size: 0.85rem;
+}
+
+/* AJUSTE PARA MÓVILES */
+@media (max-width: 768px) {
+    .footer__container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer__social {
+        justify-content: center;
+    }
+    
+    .footer__link:hover {
+        padding-left: 0; /* Quitamos el desplazamiento en móvil para no romper el centro */
+    }
+}
